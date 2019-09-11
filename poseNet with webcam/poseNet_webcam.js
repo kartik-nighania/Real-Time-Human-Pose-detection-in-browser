@@ -43,8 +43,8 @@ function setup() {
   /*
     An event or trigger.
     Whenever webcam gives a new image, it is given to the poseNet model.
-    The moment pose is detected and output is ready it calls this:
-    function(result): where result is the model output.
+    The moment pose is detected and output is ready it calls:
+    function(result): where result is the models output.
     store this in poses variable for furthur use.
   */
   poseNet.on('pose', function(results) {
@@ -83,7 +83,7 @@ function draw() {
 }
 
 // A function to draw detected points on the image.
-function drawKeypoints()  {
+function drawKeypoints(){
   /*
     Remember we saved all the result from the poseNet output in "poses" array.
     Loop through every pose and draw keypoints
@@ -94,7 +94,7 @@ function drawKeypoints()  {
     for (let j = 0; j < pose.keypoints.length; j++) {
       // A keypoint is an object describing a body part (like rightArm or leftShoulder)
       let keypoint = pose.keypoints[j];
-      // Only draw an ellipse is the pose probability is bigger than 0.2
+      // Only draw an ellipse if the pose probability is bigger than 0.2
       if (keypoint.score > 0.2) {
         // choosing colour. RGB where each colour ranges from 0 255
         fill(0, 0, 255);
@@ -103,9 +103,9 @@ function drawKeypoints()  {
         /* draw a small ellipse. Which being so small looks like a dot. Purpose complete.
             input: X position of the point in the 2D image
                    Y position as well
-                   width of the ellipse. 10 given
-                   height of the ellipse. 10 given
-          */
+                   width in px of the ellipse. 10 given
+                   height in px of the ellipse. 10 given
+        */
         ellipse(keypoint.position.x, keypoint.position.y, 10, 10);
       }
     }
